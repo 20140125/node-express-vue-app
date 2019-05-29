@@ -1,5 +1,5 @@
 # node-express-vue-app
-###express-app 
+### express-app 
 ```
 服务端代码，数据库操作，提供接口
 自定义方法：
@@ -38,7 +38,7 @@ routers 路由文件
    user：管理员操作
       
 ```
-####vue-app
+#### vue-app
 ```
 前端代码，页面逻辑，调用 express-app提供的接口对数据库进行一系列操作
 页面包含：

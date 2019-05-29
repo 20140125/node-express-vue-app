@@ -219,12 +219,12 @@
                 this.showIdea = true;
                 this.activeFileTabName = item.size.toString();
                 let params = {path:item.path},tabs = {};
+                this.url = this.cgi.update;
                 tabs.label = item.name;tabs.name = item.size.toString();tabs.path = item.path;
                 apiLists.FileRead(params).then(response=>{
                     if (response.data.code === 200){
                         this.fileModel.content = response.data.result.content;
                         this.fileModel.path = item.path;
-                        this.url = this.cgi.update;
                         tabs.content = this.fileModel.content;
                         this.addCurrFileObj(tabs);
                         this.addFileTabs(tabs)

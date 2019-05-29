@@ -11,7 +11,7 @@
  Target Server Version : 100138
  File Encoding         : 65001
 
- Date: 29/05/2019 15:06:06
+ Date: 29/05/2019 16:59:14
 */
 
 SET NAMES utf8mb4;
@@ -109,7 +109,7 @@ INSERT INTO `sys_api_lists` VALUES (14, '保存接口数据', 25, '/api/interfac
 INSERT INTO `sys_api_lists` VALUES (15, '更新接口数据', 26, '/api/interface-update', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"desc\",\"desc\":\"接口描述\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"type\",\"desc\":\"接口名称\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"},{\"name\":\"href\",\"desc\":\"接口地址\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"method\",\"desc\":\"接口方法\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"request\",\"desc\":\"请求字段说明\",\"required\":\"1\",\"type\":\"Object\",\"val\":\"\"},{\"name\":\"response\",\"desc\":\"返回字段说明\",\"required\":\"1\",\"type\":\"Object\",\"val\":\"\"},{\"name\":\"response_string\",\"desc\":\"返回参数\",\"required\":\"1\",\"type\":\"Object\",\"val\":\"\"},{\"name\":\"remark\",\"desc\":\"备注\",\"required\":\"0\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"id\",\"desc\":\"记录ID\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\": []\n}', '');
 INSERT INTO `sys_api_lists` VALUES (16, '用户权限更新', 9, '/api/auth-update', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"name\",\"desc\":\"分类名称\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"pid\",\"desc\":\"分类上级ID\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"},{\"name\":\"status\",\"desc\":\"弃用状态\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"level\",\"desc\":\"层级\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"},{\"name\":\"path\",\"desc\":\"路径\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"url\",\"desc\":\"权限地址\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"id\",\"desc\":\"记录ID\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\": []\n}', '');
 INSERT INTO `sys_api_lists` VALUES (17, '接口分类更新', 27, '/api/category-update', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"name\",\"desc\":\"分类名称\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"pid\",\"desc\":\"分类上级ID\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"},{\"name\":\"status\",\"desc\":\"弃用状态\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"level\",\"desc\":\"层级\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"},{\"name\":\"path\",\"desc\":\"路径\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"id\",\"desc\":\"记录ID\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\": []\n}', '');
-INSERT INTO `sys_api_lists` VALUES (18, '读取文件内容', 30, '/api/file-read', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"path\",\"desc\":\"文件路径\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\": \"const createError = require(\'http-errors\');\\nconst express = require(\'express\');\\nconst path = require(\'path\');\\nconst cookieParser = require(\'cookie-parser\');\\nconst logger = require(\'morgan\');\\nconst session = require(\'express-session\');\\nconst app = express();\\n//session 配置\\napp.use(session({\\n    secret:\'keyboard cat\',\\n    resave:true,\\n    saveUninitialized:false,\\n    cookie:{\\n        path:\'/\',\\n        httpOnly:true,\\n        maxAge:1000*3600*24\\n    }\\n}));\\n\\n// view engine setup\\napp.set(\'views\', path.join(__dirname, \'views\'));\\napp.set(\'view engine\', \'jade\');\\n\\napp.use(logger(\'dev\'));\\napp.use(express.json());\\napp.use(express.urlencoded({ extended: false }));\\napp.use(cookieParser());\\napp.use(express.static(path.join(__dirname, \'public\')));\\n\\n//允许跨域\\napp.all(\'*\', function(req, res, next) {\\n    res.header(\\\"Access-Control-Allow-Origin\\\", \\\"*\\\");\\n    res.header(\\\"Access-Control-Allow-Headers\\\", \\\"Content-Type,Content-Length, Authorization, Accept,X-Requested-With\\\");\\n    res.header(\\\"Access-Control-Allow-Methods\\\",\\\"PUT,POST,GET,DELETE,OPTIONS\\\");\\n    res.header(\\\"X-Powered-By\\\",\'Express\');\\n    if(req.method===\\\"OPTIONS\\\") res.send(200); /*让options请求快速返回*/\\n    else  next();\\n});\\n\\n//登录拦截 （线上环境打开）\\n// app.use(function (req,res,next) {\\n//     console.log(req.session);\\n//     if(!req.session.access_token && req.url!==\'/api/common-login\'){\\n//         res.send(401);\\n//     }else{\\n//         next()\\n//     }\\n// });\\n\\n//路由列表\\napp.use(\'/api\', require(\'./routes/auth\'));  //权限\\napp.use(\'/api\',require(\'./routes/common\')); //公有\\napp.use(\'/api\',require(\'./routes/role\'));   //角色\\napp.use(\'/api\',require(\'./routes/user\'));   //管理员\\napp.use(\'/api\',require(\'./routes/log\'));    //系统日志\\napp.use(\'/api\',require(\'./routes/api\'));    //接口\\napp.use(\'/api\',require(\'./routes/category\'));    //接口分类\\napp.use(\'/api\',require(\'./routes/file\'));    //文件\\n\\n// catch 404 and forward to error handler\\napp.use(function(req, res, next) {\\n    next(createError(404));\\n});\\n\\n// error handler\\napp.use(function(err, req, res, next) {\\n    // set locals, only providing error in development\\n    res.locals.message = err.message;\\n    res.locals.error = req.app.get(\'env\') === \'development\' ? err : {};\\n    // render the error page\\n    res.status(err.status || 500);\\n    res.render(\'error\');\\n});\\n\\nmodule.exports = app;\\n\"\n}', '');
+INSERT INTO `sys_api_lists` VALUES (18, '读取文件内容', 30, '/api/file-read', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"path\",\"desc\":\"文件路径\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\": {\n        \"content\": {\n            \"name\": \"express-app\",\n            \"version\": \"1.0.0\",\n            \"private\": true,\n            \"scripts\": {\n                \"start\": \"node ./bin/www\"\n            },\n            \"dependencies\": {\n                \"body-parser\": \"^1.19.0\",\n                \"cookie-parser\": \"~1.4.4\",\n                \"debug\": \"~2.6.9\",\n                \"express\": \"~4.16.1\",\n                \"express-session\": \"^1.16.1\",\n                \"fs-extra\": \"^8.0.1\",\n                \"http-errors\": \"~1.6.3\",\n                \"jade\": \"~1.11.0\",\n                \"js-md5\": \"^0.7.3\",\n                \"jsonwebtoken\": \"^8.5.1\",\n                \"morgan\": \"~1.9.1\",\n                \"mysql\": \"^2.17.1\"\n            }\n        }\n    }\n}', '');
 INSERT INTO `sys_api_lists` VALUES (19, '更新文件内容', 32, '/api/file-update', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"path\",\"desc\":\"文件路径\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"content\",\"desc\":\"文件内容\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\": []\n}', '');
 INSERT INTO `sys_api_lists` VALUES (20, '保存文件内容', 31, '/api/file-save', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"path\",\"desc\":\"文件路径\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\":[]\n}', '');
 INSERT INTO `sys_api_lists` VALUES (21, '更新管理员信息', 13, '/api/user-update', 'POST', '[{\"name\":\"access_token\",\"desc\":\"用户token\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"username\",\"desc\":\"用户名\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"email\",\"desc\":\"用户邮箱\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"password\",\"desc\":\"密码\",\"required\":\"1\",\"type\":\"String\",\"val\":\"\"},{\"name\":\"role_id\",\"desc\":\"角色ID\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"},{\"name\":\"id\",\"desc\":\"记录ID\",\"required\":\"1\",\"type\":\"Number\",\"val\":\"\"}]', '[{\"name\":\"code\",\"desc\":\"200 成功\",\"type\":\"number\"},{\"name\":\"msg\",\"desc\":\"Success\",\"type\":\"string\"}]', '{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"result\": []\n}', '');
@@ -178,6 +178,19 @@ INSERT INTO `sys_auth` VALUES (33, '文件重命名', '/admin/file/rename', '1,3
 INSERT INTO `sys_auth` VALUES (34, '文件删除', '/admin/file/delete', '1,3,29,34', '0', 29, 4);
 
 -- ----------------------------
+-- Table structure for sys_config
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_config`;
+CREATE TABLE `sys_config`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '配置名称',
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '配置值',
+  `created_at` int(11) NOT NULL DEFAULT 0,
+  `updated_at` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
 -- Table structure for sys_log
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_log`;
@@ -188,7 +201,7 @@ CREATE TABLE `sys_log`  (
   `info` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `created_at` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 274 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 279 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -427,6 +440,11 @@ INSERT INTO `sys_log` VALUES (270, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api
 INSERT INTO `sys_log` VALUES (271, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api/interface-save\",\"info\":\"保存数据成功\",\"result\":[]}', 1559110146);
 INSERT INTO `sys_log` VALUES (272, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api/interface-update\",\"info\":\"保存数据成功\",\"result\":[]}', 1559110320);
 INSERT INTO `sys_log` VALUES (273, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api/auth-update\",\"info\":\"保存数据成功\",\"result\":{\"fieldCount\":0,\"affectedRows\":1,\"insertId\":0,\"serverStatus\":2,\"warningCount\":0,\"message\":\"(Rows matched: 1  Changed: 1  Warnings: 0\",\"protocol41\":true,\"changedRows\":1}}', 1559110400);
+INSERT INTO `sys_log` VALUES (274, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/admin/file/lists\",\"info\":\"你没有访问权限，请联系管理员【785973567】检验数据的正确性\"}', 1559115414);
+INSERT INTO `sys_log` VALUES (275, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api/file-delete\",\"info\":\"删除文件成功：../vue-app/src/components/a.vue\",\"result\":[]}', 1559118904);
+INSERT INTO `sys_log` VALUES (276, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api/interface-update\",\"info\":\"保存数据成功\",\"result\":[]}', 1559119965);
+INSERT INTO `sys_log` VALUES (277, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api/interface-update\",\"info\":\"保存数据成功\",\"result\":[]}', 1559120182);
+INSERT INTO `sys_log` VALUES (278, 'admin', '::ffff:127.0.0.1', '{\"url\":\"/api/file-update\",\"info\":\"保存数据成功\",\"result\":[]}', 1559120300);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -474,7 +492,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (2, 'admin', 'admin@qq.com', '13258473631', '9522b41474c2e769005c92712d8c92b3', 'q4QHitoX', 1, '1', 1557819669, 1557911481, '61b6debf081667f9dfe457bd684516c4');
+INSERT INTO `sys_user` VALUES (2, 'admin', 'admin@qq.com', '13258473631', '9522b41474c2e769005c92712d8c92b3', 'q4QHitoX', 1, '1', 1557819669, 1557911481, '051f5ce9db4c12a45408f05c1de89666');
 INSERT INTO `sys_user` VALUES (3, 'super', 'super@qq.com', '0', '0cbbbfd7b066f3681bf7688fa191315f', 'JJYCFAXf', 4, '1', 1557987470, 1557987470, 'a465d23193025fd404d9453ad0b298b');
 
 SET FOREIGN_KEY_CHECKS = 1;
