@@ -86,7 +86,7 @@
                 //默认显示tabs
                 activeFileTabName:null,
                 //目录列表 （可以配置到数据库）
-                pathLists:['../express-app','../vue-app','../businessmgr'],
+                pathLists:['../express-app','../vue-app'],
 
                 title:'default',
                 syncVisible:false, //是否显示弹框
@@ -147,7 +147,7 @@
              * @param element 节点组件本身。
              */
             rightClick(MouseEvent, object, Node, element) {
-                this.menuVisible = false; // 先把模态框关死，目的是 第二次或者第n次右键鼠标的时候 它默认的是true
+                this.menuVisible = false; // 关闭模态框
                 this.menuVisible = true;  // 显示模态窗口，跳出自定义菜单栏
                 const menu = document.querySelector('#menu');
                 document.addEventListener('click', this.foo); // 给整个document添加监听鼠标事件，点击任何位置执行foo方法
@@ -160,7 +160,7 @@
              */
             foo() {
                 this.menuVisible = false;
-                document.removeEventListener('click', this.foo) // 要及时关掉监听，不关掉的是一个坑，不信你试试，虽然前台显示的时候没有啥毛病，加一个alert你就知道了
+                document.removeEventListener('click', this.foo) // 关掉监听
             },
             /**
              * todo：tab切换
