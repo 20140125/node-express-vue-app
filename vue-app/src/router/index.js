@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/index'
+import Welcome from '@/components/common/index'
 import Login from '@/components/login'
 import AuthLists from '@/components/auth/lists'
 import RoleLists from '@/components/role/lists'
@@ -18,6 +19,7 @@ export default new Router({
         { path: '/admin', name: 'Index', component: Index,meta:{ mode:'',title:'首页' } },
         { path:'/admin',component: Index,
             children:[
+                { path: 'index', name:'Welcome',component:Welcome,meta:{ mode:'auth',title:'欢迎页' } },
                 { path: 'auth/lists', name:'AuthLists',component:AuthLists,meta:{ mode:'auth',title:'权限列表' } },
                 { path: 'role/lists', name:'RoleLists',component:RoleLists,meta:{ mode:'role',title:'角色列表' } },
                 { path: 'user/lists', name:'UserLists',component:UserLists,meta:{ mode:'user',title:'管理员列表' } },

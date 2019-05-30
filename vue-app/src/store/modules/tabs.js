@@ -1,8 +1,8 @@
 const state= {
-    tabs: [],
+    tabs: [{label:'欢迎页',name:'/admin/index'}],
     currTabs: {label:null,name:null},
-    activeAuthName:null,
-    contentVisible:false,
+    activeAuthName:'/admin/index',
+    contentVisible:true,
 };
 const getters={
     tabs:state=>state.tabs,

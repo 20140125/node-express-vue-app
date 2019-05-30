@@ -51,7 +51,7 @@
             <div style="padding: 10px;">
                 <el-tabs type="border-card" closable  v-model="activeName" @tab-click="goto" @tab-remove="remove" style="text-align: left!important;" v-show="contentVisible">
                     <el-tab-pane v-for="item in tabs" :label="item.label" :key="item.name" :name="item.name"></el-tab-pane>
-                    <router-view></router-view>
+                    <router-view/>
                 </el-tabs>
             </div>
         </div>
@@ -122,6 +122,7 @@
                         if (nextTab) {
                             this.deleteTabs(tabName);
                             this.activeName = nextTab.name;
+                            this.$router.push({path:this.activeName});
                             this.addCurrTabs(nextTab);
                         }
                     }

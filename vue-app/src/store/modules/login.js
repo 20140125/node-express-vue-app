@@ -37,7 +37,7 @@ const actions={
                 Message.success(response.data.msg);
                 commit('setToken',response.data.result[0].access_token);
                 commit('setUserName',response.data.result[0].username);
-                router.push({path:'/admin'});
+                router.push({path:'/admin/index'});
                 return ;
             }
             Message.warning(response.data.msg);

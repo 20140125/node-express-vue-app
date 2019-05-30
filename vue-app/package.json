@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "codemirror": "^5.47.0",
+    "echarts": "^4.2.1",
     "element-ui": "^2.8.2",
     "fs-extra": "^8.0.1",
     "js-md5": "^0.7.3",
