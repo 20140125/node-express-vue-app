@@ -28,9 +28,13 @@ router.beforeEach((to,from,next)=>{
             next();
             return;
         }
-        http.post(url.checkToken,{access_token:store.state.login.token}).then(response=>{
-            response.data.code===code.SUCCESS ? next({path:'/admin',redirect:to.path}) : next();
-        });
+        if (store.state.login.token) {
+            http.post(url.checkToken,{access_token:store.state.login.token}).then(response=>{
+                console.log(response);
+                response.data.code===code.SUCCESS ? next({path:'/admin',redirect:to.path}) : next();
+            });
+        }
+
     } else {
         http.post(url.checkToken,{access_token:store.state.login.token}).then(response=>{
             if (response.data.code === code.FORBIDDEN){

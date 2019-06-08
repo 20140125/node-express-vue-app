@@ -3,7 +3,7 @@
         <el-table :data="logLists" border>
             <el-table-column label="#" prop="id"></el-table-column>
             <el-table-column label="执行人" prop="username"></el-table-column>
-            <el-table-column label="日志信息" prop="info"></el-table-column>
+            <el-table-column label="日志信息" prop="info" :show-overflow-tooltip="true"></el-table-column>
             <el-table-column label="地址" prop="ip_address"></el-table-column>
             <el-table-column label="创建时间" sortable>
                 <template slot-scope="scope">
