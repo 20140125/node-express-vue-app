@@ -196,7 +196,7 @@
                 this.syncVisible = false;
             },
             /**
-             * 设置权限名称
+             * todo:设置API名称
              * @param item
              * @return {String}
              */
@@ -204,7 +204,7 @@
                 return Array(item.level).join('　　')+item.name;
             },
             /**
-             * todo：获取角色列表
+             * todo：获取API分类列表
              */
             getCategoryLists:function () {
                 apiLists.CategoryLists({}).then(response=>{

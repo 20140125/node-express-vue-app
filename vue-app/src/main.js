@@ -28,14 +28,18 @@ router.beforeEach((to,from,next)=>{
             next();
             return;
         }
-        if (store.state.login.token) {
-            http.post(url.checkToken,{access_token:store.state.login.token}).then(response=>{
-                console.log(response);
-                response.data.code===code.SUCCESS ? next({path:'/admin',redirect:to.path}) : next();
-            });
-        }
+        http.post(url.checkToken,{access_token:store.state.login.token}).then(response=>{
+            if (response.data.code === 200) {
+                next({path:'/admin',redirect:to.path})
+            }
+            next();
+        });
 
     } else {
+        if (!store.state.login.token){
+            next({path:'/login',redirect:to.path});
+            return;
+        }
         http.post(url.checkToken,{access_token:store.state.login.token}).then(response=>{
             if (response.data.code === code.FORBIDDEN){
                 ElementUI.Message.warning(response.data.msg);
