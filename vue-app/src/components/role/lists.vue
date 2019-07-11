@@ -52,7 +52,14 @@
                     <el-input v-model="roleModel.role_name" placeholder="角色名称"></el-input>
                 </el-form-item>
                 <el-form-item label="权限列表" prop="ids">
-                    <el-tree :props="props" :data="auth" default-expand-all @check-change="handleCheckChange" show-checkbox :node-key="props.id"  :default-checked-keys="defaultChecked"></el-tree>
+                    <el-transfer
+                            :titles="['所有', '拥有']"
+                            :button-texts="['移除', '添加']"
+                            v-model="defaultChecked"
+                            :data="auth"
+                            filterable
+                            @change="handleChange">
+                    </el-transfer>
                 </el-form-item>
                 <el-form-item label="状态" prop="status">
                     <el-radio-group v-model="roleModel.status" size="small">
@@ -81,11 +88,6 @@
         components: {Submit, Delete, Radio},
         data(){
             return {
-                props:{
-                    label:'name',
-                    children:'__child',
-                    id:'id',
-                },
                 roleLists:[],
                 page:1,
                 limit:15,
@@ -93,7 +95,7 @@
                 loading:true,
                 loadingText:'玩命加载中。。。',
                 auth:[],
-                defaultChecked:[],
+
 
                 title:'',
                 syncVisible:false, //是否显示弹框
@@ -113,8 +115,9 @@
                     updated_at:func.get_timestamp()
                 },
 
-                ids:[1],
-                urls:['/admin'],
+                defaultChecked:[],
+                ids:[],
+                urls:[],
 
                 cgi:{
                     insert:$url.roleSave,
@@ -154,7 +157,10 @@
                     if (response.data.code===200){
                         this.roleLists = response.data.result.role;
                         this.total = response.data.result.total;
-                        this.auth = func.set_tree(response.data.result.auth);
+                        let auth = response.data.result.auth;
+                        for (let i in auth){
+                            this.auth.push({'key':auth[i].id,'label':auth[i].name})
+                        }
                         this.loading = false;
                     }
                 })
@@ -184,31 +190,27 @@
                 this.url = this.cgi.insert;
             },
             /**
-             * todo：获取选中的节点
-             * @param data  该节点所对应的对象
-             * @param checked 节点本身是否被选中
-             * @param indeterminate 节点的子树中是否有被选中的节点
+             * @param value      当前值
+             * @param direction  数据移动的方向（'left' / 'right'）
+             * @param movedKeys  发生移动的数据 key 数组
              */
-            handleCheckChange:function(data, checked, indeterminate) {
-                if ((checked || indeterminate) && this.ids.indexOf(data.id)<=-1){
-                    this.ids.push(data.id);
-                    this.urls.push(data.auth_url)
-                }else if (!checked && !indeterminate && this.ids.indexOf(data.id)>=1 ){
-                    this.ids.splice(this.ids.indexOf(data.id),1);
-                    this.urls.splice(this.urls.indexOf(data.auth_url),1)
+            handleChange(value, direction, movedKeys) {
+                let __this = this;
+                switch (direction) {
+                  //删除
+                    case 'left':
+                        movedKeys.forEach(function (item,index) {
+                            __this.ids.splice(__this.ids.indexOf(item),1);
+                        });
+                        break;
+                  //添加
+                    case 'right':
+                        movedKeys.forEach(function (item,index) {
+                            __this.ids.push(parseInt(item));
+                        });
+                        break;
                 }
-                for (let i in this.ids){
-                    if (this.ids[i] === 1){
-                        this.ids.splice(i,1);
-                    }
-                }
-                for (let j in this.urls){
-                    if (this.urls[j] === '0'){
-                        this.urls.splice(j,1);
-                    }
-                }
-                this.roleModel.ids = JSON.stringify(this.ids);
-                this.roleModel.urls = JSON.stringify(this.urls);
+                __this.roleModel.ids = __this.ids;
             },
             /**
              * todo：更新角色
@@ -220,8 +222,12 @@
                 this.url = this.cgi.update;
                 this.ids = JSON.parse(item.ids);
                 this.urls = JSON.parse(item.urls);
-                this.defaultChecked = JSON.parse(item.ids);
+                this.defaultChecked = []; //需要重置角色拥有的权限
+                for (let i in this.ids){
+                    this.defaultChecked.push(parseInt(this.ids[i]));
+                }
                 this.roleModel = item;
+                this.roleModel.ids = this.defaultChecked;
                 this.roleModel.updated_at = func.get_timestamp();
             }
         },

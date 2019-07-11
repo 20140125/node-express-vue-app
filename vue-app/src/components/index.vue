@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-    import baseModule from '@/components/common/base'
+    import baseModule from '@/components/common/Base'
     export default{
         name:'index',
         data(){

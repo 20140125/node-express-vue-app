@@ -77,7 +77,7 @@ __this.router.post('/common-login',function (request,response) {
                 return ;
             }
             //登录成功修改access_token
-            let access_token = __this.func.set_password(result[0]['password'],__this.func.get_timestamp().toString());
+            let access_token = __this.func.set_password(result[0]['password'],__this.func.get_timestamp());
             // noinspection SqlResolve
             connection.query('update `sys_user` set access_token = ? where id =?',[access_token,result[0]['id']],function (error,updateResult) {
                 if (error){
@@ -98,13 +98,13 @@ __this.router.post('/common-login',function (request,response) {
  * @param request 用户请求参数
  * @param response 返回参数
  */
-__this.router.post('/common-logout',function (request,response) {
+__this.router.post('/common-logout',function  (request,response) {
     let params = request.body;
     __this.pool.getConnection(function (error,connection) {
-        if (error){throw error}
+        if (error){  throw error  }
         let access_token = __this.func.set_password(params.access_token,__this.func.get_timestamp());
         // noinspection SqlResolve
-        connection.query("update `sys_user` set access_token = ? where access_token =?",[access_token,params.access_token],function (error,result) {
+        connection.query("update `sys_user` set access_token = ? where access_token = ? ",[access_token,params.access_token],function (error,result) {
             if (error) {
                 connection.rollback(function () {throw error})
             }

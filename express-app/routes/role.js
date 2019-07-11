@@ -68,22 +68,30 @@ __this.router.post('/role-save',(request,response)=>{
  */
 __this.router.post('/role-update',(request,response)=>{
     let params = request.body;
+    params.urls = [];
     __this.pool.getConnection(function (error,connection) {
         if (error) {throw error}
-        connection.query(__this.$sql.role.update,[params.role_name,params.urls,params.ids,params.status,params.updated_at,params.id],function (error,result) {
-            if (error) {
-                connection.rollback(function () {throw error})
-            }
-            if (result.length<1){
-                response.code = __this.code.ERROR;
-                response.msg = error;
-                __this.jsonWrite(response);
-                connection.release(); //释放资源链接
-                return;
-            }
-            __this.jsonWrite(response,result);
-            connection.release(); //资源释放
-        })
+        // noinspection SqlResolve
+        connection.query('select url from `sys_auth` where id in (?)',[params.ids],function (urlErr,urlResult) {
+            if (urlErr) {throw urlErr}
+            urlResult.forEach(function (item,index) {
+                params.urls.push(item.url)
+            })
+            connection.query(__this.$sql.role.update,[params.role_name,JSON.stringify(params.urls),JSON.stringify(params.ids),params.status,params.updated_at,params.id],function (error,result) {
+                if (error) {
+                    connection.rollback(function () {throw error})
+                }
+                if (result.length<1){
+                    response.code = __this.code.ERROR;
+                    response.msg = error;
+                    __this.jsonWrite(response);
+                    connection.release(); //释放资源链接
+                    return;
+                }
+                __this.jsonWrite(response,result);
+                connection.release(); //资源释放
+            })
+        });
     })
 });
 module.exports = __this.router;

@@ -50,7 +50,7 @@ const actions={
      * @param token
      */
     logoutSystem:function ({state,commit},token) {
-        http.post(url.logout,token).then(response=>{
+        http.post(url.logout,{access_token:token}).then(response=>{
             Message.success(response.data.msg);
             commit('setToken','');
             commit('setUserName','');

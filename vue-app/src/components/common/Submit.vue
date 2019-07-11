@@ -23,7 +23,6 @@
         methods:{
             ...mapActions(['saveSystemLog']),
             submitForm:function(ref){
-                console.log(this.model);
                 if (this.$store.state.login.auth_url.indexOf(this.url.replace('-','/').replace('api','admin'))===-1){
                     let info ='你没有访问权限，请联系管理员【'+this.code.QQ+'】检验数据的正确性', data = { info:JSON.stringify({url:this.url, info:info}) };
                     this.saveSystemLog(data);
@@ -32,15 +31,16 @@
                         }
                     });
                     return ;
-                } 
+                }
                 this.refs[ref].validate((valid)=>{
                     if (valid){
                         this.$http.post(this.url,this.model).then(response=>{
                             let data = { info:JSON.stringify({url:this.url, info:'保存数据成功',result:response.data.result}) };
                             this.saveSystemLog(data);
-                            this.$message({type:'success',message:'保存成功'});
-                            this.$emit('success');
-                            console.log(response);
+                            if (response.data.code === 200){
+                                this.$message({type:'success',message:'保存成功'});
+                                this.$emit('success');
+                            }
                         },error=>{
                             console.log(error);
                         });

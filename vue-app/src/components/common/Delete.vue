@@ -41,11 +41,12 @@
                 }).then(()=>{
                     let params = {tableName:'sys_'+this.table,id:item.id};
                     this.$http.post(this.url,params).then(response=>{
-                        console.log(response);
-                        this.Lists.splice(index,1);
-                        let data = { info:JSON.stringify({url:this.url, info:'删除记录成功',result:response.data.result}) };
-                        this.saveSystemLog(data);
-                        this.$message({type:'success',message:'删除记录成功！'});
+                        if (response.data.code === 200){
+                            this.Lists.splice(index,1);
+                            let data = { info:JSON.stringify({url:this.url, info:'删除记录成功',result:response.data.result}) };
+                            this.saveSystemLog(data);
+                            this.$message({type:'success',message:'删除记录成功！'});
+                        }
                     },error=>{
                         console.log(error);
                     })

@@ -126,7 +126,7 @@ const str_shuffle=function(str){
  * @return {string}
  */
 const set_password=function(pass,slat){
-    return md5(md5(pass)+md5(slat));
+    return md5(md5(pass)+md5(slat.toString()));
 };
 
 /**

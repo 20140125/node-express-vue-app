@@ -9,7 +9,7 @@ let sqlMap = {
         select: 'select * from `sys_role` limit ?,?',
         selectAll: 'select `id`,`role_name` from `sys_role` where `status`=?',
         add: 'insert into `sys_role` set `role_name`=?,`urls`=?,`ids`=?,`status`=?,`created_at`=?,`updated_at`=?',
-        update: 'update `sys_role` set `role_name`=?,`urls`=?,`ids`=?,`status`=?,`updated_at`=? where `id`=?'
+        update: 'update `sys_role` set `role_name`=?,`urls`=?,`ids`=?,`status`=?,`updated_at`=? where `id`=?',
     },
     users:{
         select: 'select * from `sys_user` limit ?,?',
