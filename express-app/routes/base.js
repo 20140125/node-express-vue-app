@@ -6,6 +6,7 @@ const $sql = require('../config/sqlMap');
 const func  = require( '../config/func');  //自定义函数
 const code = require('../config/code');
 const fse = require('fs-extra');
+const http = require('../config/request');
 //连接池链接数据库
 const pool = mysql.createPool(models.mysql);
 /**
@@ -32,6 +33,7 @@ const base = {
     mysql:mysql,
     code:code,
     fse:fse,
+    request:http,
     jsonWrite:jsonWrite
 };
 //基础配置
