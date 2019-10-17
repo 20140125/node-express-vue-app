@@ -37,6 +37,9 @@ const fileSave = function (params) {
 const fileDelete = function (params) {
     return request.post(url.fileDelete,params)
 };
+const musicLists = function (params) {
+    return request.post(url.musicLists,params)
+};
 const interfaceLists = {
     AuthLists:authLists,
     RoleLists:roleLists,
@@ -49,6 +52,7 @@ const interfaceLists = {
     FileRead:fileRead,
     FileRename:fileRename,
     FileSave:fileSave,
-    FileDelete:fileDelete
+    FileDelete:fileDelete,
+    MusicLists:musicLists,
 };
 export default interfaceLists;

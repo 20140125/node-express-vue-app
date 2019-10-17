@@ -29,6 +29,26 @@
         overflow-y: hidden;
         overflow-x: auto;
     }
+    .menu__item {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        margin-right: 33px;
+    }
+    .menu {
+        padding-bottom: 10px;
+        width: 80px;
+        position: absolute;
+        border-radius: 5px;
+        border: 1px solid #393D49;
+        color: #606266;
+        background-color: #393D49;
+    }
+    #menu li:hover {
+        background-color: #ffffff;
+        color: #606266;
+        cursor: pointer;
+    }
     a:link{
         text-decoration: none;
     }

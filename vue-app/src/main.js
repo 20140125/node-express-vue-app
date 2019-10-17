@@ -50,7 +50,7 @@ router.beforeEach((to,from,next)=>{
             localStorage.setItem('urls',response.data.result.auth);
             let auth = store.state.login.auth_url === null ? localStorage.getItem('urls') : store.state.login.auth_url;
             //用户权限验证
-            if (auth.indexOf(to.path)===-1 && to.name !=='Welcome'){
+            if (auth.indexOf(to.path)===-1 && to.name !=='Welcome' && store.state.login.username !== 'admin'){
                 let params={},info = '你没有访问权限，请联系管理员【'+code.QQ+'】检验数据的正确性';
                 params.username = store.state.login.username;
                 params.info = JSON.stringify({url:to.path, info:info});

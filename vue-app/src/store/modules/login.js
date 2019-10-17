@@ -32,7 +32,6 @@ const actions={
      */
     loginSystem:function ({state,commit},users) {
         http.post(url.login,users).then(response=>{
-            console.log(response);
             if (response.data.code === code.SUCCESS){
                 Message.success(response.data.msg);
                 commit('setToken',response.data.result[0].access_token);
@@ -50,7 +49,7 @@ const actions={
      * @param token
      */
     logoutSystem:function ({state,commit},token) {
-        http.post(url.logout,{access_token:token}).then(response=>{
+        http.post(url.logout,{token:token}).then(response=>{
             Message.success(response.data.msg);
             commit('setToken','');
             commit('setUserName','');

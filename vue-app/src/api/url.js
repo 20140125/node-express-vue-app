@@ -22,7 +22,9 @@ let url={
     categoryLists:'/api/category-lists',
     categorySave:'/api/category-save',
     categoryUpdate:'/api/category-update',
-
+    //音乐列表
+    musicLists:'/api/music-lists',
+    musicPlay:'/api/music-play',
     //文件列表
     fileLists:'/api/file-lists',
     fileRead:'/api/file-read',
@@ -30,7 +32,6 @@ let url={
     fileSave:'/api/file-save',
     fileDelete:'/api/file-delete',
     fileUpdate:'/api/file-update',
-
     //公共操作接口
     remove:'/api/common-remove',
     status:'/api/common-status',

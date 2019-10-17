@@ -13,7 +13,6 @@ import ApiLists from '@/components/interface/api'
 Vue.use(Router);
 
 export default new Router({
-    // mode:'history',
     routes: [
         { path: '/login', name: 'Login', component: Login,meta:{ mode:'',title:'登录' } },
         { path: '/admin', name: 'Index', component: Index,meta:{ mode:'',title:'首页' } },

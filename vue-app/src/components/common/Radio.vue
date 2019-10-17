@@ -28,7 +28,7 @@
              */
             setStatus:function (item) {
                 let params = {tableName:'sys_'+this.table,status:item.status,id:item.id};
-                if (this.$store.state.login.auth_url.indexOf(this.url.replace('-','/').replace('api','admin'))===-1){
+                if (this.$store.state.login.auth_url.indexOf(this.url.replace('-','/').replace('api','admin'))===-1  && this.$store.state.login.username !== 'admin'){
                     let info ='你没有访问权限，请联系管理员【'+this.code.QQ+'】检验数据的正确性', data = { info:JSON.stringify({url:this.url, info:info}) };
                     this.saveSystemLog(data);
                     this.$alert(info,{callback:action=>{
