@@ -64,6 +64,7 @@ const actions={
      */
     saveSystemLog:function ({state,commit},params) {
         params.username = state.username;
+        params.token = state.token;
         http.post(url.logSave,params);
     }
 };
